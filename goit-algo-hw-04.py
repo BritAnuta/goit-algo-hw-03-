@@ -1,58 +1,58 @@
-# ~ Перше завдання ~
+# # ~ Перше завдання ~
 
-def total_salary(path):
+# def total_salary(path):
     
-    # Створюємо обробку помилки відсутності файлу або помилки читання
+#     # Створюємо обробку помилки відсутності файлу або помилки читання
 
-    try:
-        with open ("path.txt", "r", encoding='utf-8') as list: # Коректно відкриваємо наш текстовий файл
-            lines = list.readlines() # Читаємо по рядках
-            total_salary = 0 # Створюємо значення загальної зарплатні
+#     try:
+#         with open ("path.txt", "r", encoding='utf-8') as list: # Коректно відкриваємо наш текстовий файл
+#             lines = list.readlines() # Читаємо по рядках
+#             total_salary = 0 # Створюємо значення загальної зарплатні
 
-            for coleg in lines:
-                name, salary_str = coleg.split(',') # Розбиваємо наші дані по комі
-                salary = int(salary_str) # Переводимо строку у число
-                total_salary += salary # Додаємо усі зарплатні зі списку і отримуємо загальну зарплатню
+#             for coleg in lines:
+#                 name, salary_str = coleg.split(',') # Розбиваємо наші дані по комі
+#                 salary = int(salary_str) # Переводимо строку у число
+#                 total_salary += salary # Додаємо усі зарплатні зі списку і отримуємо загальну зарплатню
         
-            num_people = len(lines) # Розраховуємо кількість людей зі списка
-            average_salary = total_salary // num_people # Розраховуємо середню зарплатню
-            return total_salary, average_salary   # Повертаємо наші значення
+#             num_people = len(lines) # Розраховуємо кількість людей зі списка
+#             average_salary = total_salary // num_people # Розраховуємо середню зарплатню
+#             return total_salary, average_salary   # Повертаємо наші значення
 
-    except Exception:
-        print("Не вдалося знайти файл зі списком колег") # Виведеться при помилці
+#     except Exception:
+#         print("Не вдалося знайти файл зі списком колег") # Виведеться при помилці
 
-total, average = total_salary("path.txt") # Визиваємо нашу функцію
-print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
+# total, average = total_salary("path.txt") # Визиваємо нашу функцію
+# print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
 
-# ~ Друге завдання ~
+# # ~ Друге завдання ~
 
-def get_cats_info(path):
+# def get_cats_info(path):
 
-    cats_list = [] # Створюємо порожній список, куди будуть повертатись наші словнички 
+#     cats_list = [] # Створюємо порожній список, куди будуть повертатись наші словнички 
 
-    # Створюємо обробку можливості помилки
-    try:
-        with open (path, "r", encoding='utf-8') as file: # Корректно відкриваємо файл
+#     # Створюємо обробку можливості помилки
+#     try:
+#         with open (path, "r", encoding='utf-8') as file: # Корректно відкриваємо файл
 
-            # За допомогою циклу пробігаємось по нашому текстовому файлу
-            for line in file:
-                cat_info = line.strip().split(',') # Розбиваємо наші дані по комі, виключаючи можливість непотрібних пробілів
-                cat_dict = {"id": cat_info[0], "name": cat_info[1], "age": int(cat_info[2]) } # Створюємо словник з елементами інформації
+#             # За допомогою циклу пробігаємось по нашому текстовому файлу
+#             for line in file:
+#                 cat_info = line.strip().split(',') # Розбиваємо наші дані по комі, виключаючи можливість непотрібних пробілів
+#                 cat_dict = {"id": cat_info[0], "name": cat_info[1], "age": int(cat_info[2]) } # Створюємо словник з елементами інформації
 
-                cats_list.append(cat_dict) # Додаємо у наш список усі словнички з інформацією
+#                 cats_list.append(cat_dict) # Додаємо у наш список усі словнички з інформацією
 
-    # Якщо буде помилка, то видасть яка саме і поверне порожній список    
-    except Exception as e:
-        print("Помилка:", e)
-        return cats_list
+#     # Якщо буде помилка, то видасть яка саме і поверне порожній список    
+#     except Exception as e:
+#         print("Помилка:", e)
+#         return cats_list
     
-    return cats_list # Повертаємо значення у наш список
+#     return cats_list # Повертаємо значення у наш список
 
-cats_list = get_cats_info("Cats.txt") # Викликаємо нашу функцію, яка зчитує значення з нашого текстового файлу
+# cats_list = get_cats_info("Cats.txt") # Викликаємо нашу функцію, яка зчитує значення з нашого текстового файлу
 
-# Виводимо результат так, щоб кожний словничок з інформацією кота був на новому рядку
-for cat in cats_list:
-    print(cat)
+# # Виводимо результат так, щоб кожний словничок з інформацією кота був на новому рядку
+# for cat in cats_list:
+#     print(cat)
 
 # ~ Четвертє завдання ~
 
@@ -70,9 +70,12 @@ def add_contact(args, contacts):
 
 # Прописуємо фунцію, що буде змінювати номер контакта, який вже є
 def change_contact(args, contacts):
-    args[0] in contacts.keys() # перевіряємо наявність контакту за ім'ям
-    add_contact(args, contacts) # якщо є, визиваємо функцію додавання номера
-    return "Contact changed."
+     # Обробляємо помилку, якщо користувач запросив неіснуючий контакт
+    if args[0] in contacts.keys(): # перевіряємо наявність контакту за ім'ям
+        add_contact(args, contacts) # якщо є, визиваємо функцію додавання номера
+        return "Contact changed."
+    else:
+        return "Contact is not found" # якщо немає - поверне і виведе цю інформацію   
     
 # Прописуємо фунцію, що буде показувати номер контакту за запросом користувача    
 def show_contact(args, contacts):
